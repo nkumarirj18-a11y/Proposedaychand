@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Chand ❤️</title>
+    <style>
+        body {
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0; 
+            background: #0a0000; font-family: 'Segoe UI', Arial, sans-serif;
+            overflow: hidden; position: relative; color: #fff;
+            cursor: crosshair;
+        }
 
+        .bg-animate {
+            position: absolute; width: 100%; height: 100%;
+            background: radial-gradient(circle, #3d0101 0%, #000000 100%);
+            z-index: -1; animation: pulseBg 5s infinite alternate;
+        }
+        @keyframes pulseBg { from { opacity: 0.6; } to { opacity: 1; } }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(25px);
+            padding: 40px; border-radius: 60px;
+            box-shadow: 0 0 100px rgba(255, 77, 109, 0.4); 
+            text-align: center; z-index: 10; width: 85%; max-width: 400px; 
+            border: 1px solid rgba(255, 255, 255, 0.2); position: relative;
+        }
+
+        .ring-container {
+            font-size: 90px; margin-bottom: 25px;
+            filter: drop-shadow(0 0 30px #ff4d6d);
+            animation: ring3D 5s infinite ease-in-out;
+        }
+        @keyframes ring3D {
+            0% { transform: rotateY(0deg) scale(1); }
+            50% { transform: rotateY(180deg) scale(1.1); }
+            100% { transform: rotateY(360deg) scale(1); }
+        }
+
+        #yesBtn { 
+            background: linear-gradient(45deg, #ff4d6d, #800020); color: #fff; 
+            padding: 20px 60px; border: none; border-radius: 50px; 
+            font-weight: bold; cursor: pointer; font-size: 26px; 
+            box-shadow: 0 10px 40px rgba(255, 77, 109, 0.6); transition: 0.5s;
+        }
+
+        #noBtn { 
+            background: transparent; color: #444; border: 1px solid #222;
+            padding: 8px 15px; border-radius: 50px; cursor: pointer; margin-top: 30px;
+        }
+
+        .particle {
+            position: absolute; pointer-events: none; z-index: 100;
+            animation: explode 3s ease-out forwards;
+        }
+        @keyframes explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) rotate(360deg) scale(0); opacity: 0; }
+        }
+
+        .float-img {
+            position: absolute; bottom: -200px; width: 105px; height: 135px;
+            object-fit: cover; border-radius: 20px; border: 2px solid rgba(255, 255, 255, 0.3);
+            z-index: 5; animation: floatUp 10s linear forwards;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        @keyframes floatUp { to { transform: translateY(-150vh) rotate(360deg); } }
+
+        .magic-heart {
+            position: absolute; pointer-events: none;
+            animation: starFade 1s linear forwards; z-index: 999;
+            color: #ff4d6d; font-size: 20px;
+        }
+        @keyframes starFade {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        #celebration { display: none; }
+        #typewriter { font-size: 20px; color: #ffb3c1; margin: 30px 0; font-weight: bold; line-height: 1.6; }
+        .tagline { font-size: 12px; color: #ff4d6d; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px; font-weight: bold;}
+    </style>
+</head>
+<body onmousemove="spawnHeart(event)" ontouchmove="spawnHeart(event)">
+
+    <div class="bg-animate"></div>
+
+    <div class="card">
+        <div class="tagline"> Beyond Time & Space - Pure Eternal Love</div>
+        
+        <div id="asking">
+            <div class="ring-container">💍</div>
+            <h1 style="font-size: 26px; color: #fff; margin-bottom: 20px;">Chand, my heart has found its home...</h1>
+            <p style="font-style: italic; color: #ffb3c1; font-size: 22px; line-height: 1.5; margin-bottom: 40px;">
+                "Tum meri habit nahi ho, <br> tum meri home feeling ho." 💍❤️
+            </p>
+            <button id="yesBtn">YES! I'm Home ❤️</button>
+            <br>
+            <button id="noBtn">No</button>
+        </div>
+
+        <div id="celebration">
+            <div class="ring-container">💖💍💖</div>
+            <div id="typewriter"></div>
+            <h2 style="color:#ff4d6d; animation: pulse 1s infinite; margin-top: 20px;">Infinite Love Locked!</h2>
+            <p style="font-size: 14px; opacity: 0.7;">Now and Forever, I'm yours. ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const asking = document.getElementById('asking');
+        const celebration = document.getElementById('celebration');
+
+        function spawnHeart(e) {
+            const h = document.createElement("div");
+            h.className = "magic-heart";
+            h.innerHTML = "❤️";
+            h.style.left = (e.pageX || (e.touches ? e.touches[0].pageX : 0)) + "px";
+            h.style.top = (e.pageY || (e.touches ? e.touches[0].pageY : 0)) + "px";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 1000);
+        }
+
+        noBtn.onmouseover = () => {
+            noBtn.style.position = "absolute";
+            noBtn.style.left = Math.random() * 80 + "vw";
+            noBtn.style.top = Math.random() * 80 + "vh";
+        };
+
+        yesBtn.onclick = () => {
+            asking.style.display = "none";
+            celebration.style.display = "block";
+            createExplosion();
+            startGallery();
+            typeWriter();
+        };
+
+        function createExplosion() {
+            const items = ['❤️', '💖', '💍', '✨', '🌸'];
+            for (let i = 0; i < 70; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.innerHTML = items[Math.floor(Math.random() * items.length)];
+                p.style.left = '50vw';
+                p.style.top = '50vh';
+                const x = (Math.random() - 0.5) * 1000;
+                const y = (Math.random() - 0.5) * 1000;
+                p.style.setProperty('--x', `${x}px`);
+                p.style.setProperty('--y', `${y}px`);
+                p.style.fontSize = Math.random() * 20 + 20 + 'px';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 3000);
+            }
+        }
+
+        function startGallery() {
+            const photos = ['p1.jpeg','p2.jpeg','p3.jpeg','p4.jpeg','p5.jpeg','p6.jpeg','p7.jpeg','p8.jpeg','p9.jpeg','p10.jpeg','p11.jpeg','p12.jpeg','p13.jpeg','p14.jpeg'];
+            setInterval(() => {
+                const img = document.createElement('img');
+                img.src = photos[Math.floor(Math.random() * photos.length)];
+                img.className = 'float-img';
+                img.style.left = Math.random() * 85 + 'vw';
+                document.body.appendChild(img);
+                setTimeout(() => img.remove(), 10000);
+            }, 1500);
+        }
+
+        function typeWriter() {
+            const text = "Aapke bina har jagah paraya lagta hai Chand. Ab se aur hamesha ke liye, tum hi mera sukoon ho aur tum hi mera ghar. I love you! ❤️💍";
+            let i = 0;
+            const container = document.getElementById('typewriter');
+            function play() {
+                if (i < text.length) {
+                    container.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(play, 60);
+                }
+            }
+            play();
+        }
+    </script>
+</body>
+</html>
